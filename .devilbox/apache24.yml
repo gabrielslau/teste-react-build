@@ -1,0 +1,41 @@
+---
+vhost: |
+  <VirtualHost __DEFAULT_VHOST__:__PORT__>
+      ServerName __VHOST_NAME__
+      ServerAlias *.__VHOST_NAME__
+      Protocols  __HTTP_PROTO__
+
+      CustomLog  "__ACCESS_LOG__" combined
+      ErrorLog   "__ERROR_LOG__"
+
+      __REDIRECT__
+      __SSL__
+      __VHOST_DOCROOT__
+      __VHOST_RPROXY__
+      __PHP_FPM__
+      __ALIASES__
+      __DENIES__
+      __SERVER_STATUS__
+      # Custom directives
+      __CUSTOM__
+  </VirtualHost>
+
+vhost_type:
+  docroot: |
+    # Define the vhost to serve files
+    DocumentRoot "/shared/httpd/teste-react-build/dist/"
+    <Directory "/shared/httpd/teste-react-build/dist/">
+        DirectoryIndex __INDEX__
+
+        FallbackResource /index.html
+
+        AllowOverride All
+        Options All
+
+        RewriteEngine on
+        RewriteBase /
+
+        Order allow,deny
+        Allow from all
+        Require all granted
+    </Directory>

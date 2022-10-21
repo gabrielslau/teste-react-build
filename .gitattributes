@@ -1,0 +1,65 @@
+# Define the line ending behavior of the different file extensions
+# Set default behaviour, in case users don't have core.autocrlf set.
+* text=auto
+* text eol=lf whitespace=-blank-at-eol,blank-at-eof,-space-before-tab,indent-with-non-tab
+
+# Explicitly declare text files we want to always be normalized and converted
+# to native line endings on checkout.
+*.py            text diff=python
+*.css           text diff=css
+*.scss          text diff=css
+*.html          text diff=html
+*.js            text
+*.jsx           text
+*.ts            text
+*.tsx           text
+*.json          text
+*.lock          text
+*.md            text diff=markdown
+*.mdx           text diff=markdown
+*.ini           text
+*.po            text
+*.script        text
+*.sh            text diff=bash
+*.sql           text
+*.svg           text
+*.txt           text
+*.xml           text
+*.xsd           text
+*.yml           text
+*.yaml          text
+*.log           text
+*.config        text
+.htaccess       text
+.babelrc        text
+.editorconfig   text
+.env            text
+.eslintignore   text
+
+
+# Declare files that will always have CRLF line endings on checkout.
+*.bat   eol=crlf
+
+# Declare files that will always have LF line endings on checkout.
+*.pem   eol=lf
+
+# Define binary file attributes.
+# - Do not treat them as text.
+# - Include binary diff in patches instead of "binary files differ."
+*.gif     -text diff
+*.gz      -text diff
+*.ico     -text diff
+*.jpeg    -text diff
+*.jpg     -text diff
+*.png     -text diff
+*.webp    -text diff
+*.phar    -text diff
+*.pdf     -text diff
+*.exe     -text diff
+*.svgz    -text diff
+*.zip     -text diff
+*.eot     -text diff
+*.ttf     -text diff
+*.otf     -text diff
+*.woff    -text diff
+*.woff2   -text diff

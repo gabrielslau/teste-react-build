@@ -1,0 +1,68 @@
+{
+  "compileOnSave": false,
+
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": "./",
+    "paths": {
+      "@src/*": ["./src/*"],
+    },
+    "outDir": "./dist/",
+    "module": "ES2020",
+    "target": "es2015",
+    "allowJs": true,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "declaration": true, /* Generates corresponding '.d.ts' file. */
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    // Disallow features that require cross-file information for emit.
+    // Cross-file information is not supported by Babel.
+    "isolatedModules": true,
+    // Don't emit; only do type-checking, leave trasformation to Babel.
+    "noEmit": true,
+    // Support jsx in .tsx files (https://www.typescriptlang.org/docs/handbook/jsx.html)
+    "jsx": "react",
+    // Library files to be used in the project.
+    // Tells the compiler that 'DOM-APIs' and new ECMAScript features are valid.
+    "lib": [
+      "dom",
+      "ES2015",
+      "ES2016",
+      "ES2017",
+      "ES2018",
+      "ES2019",
+      "ES2021",
+    ],
+  },
+
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx"
+  ],
+  "exclude": [
+    "./node_modules",
+    "**/*.spec.ts",
+    "./assets/public",
+    "./core",
+    "./.npm",
+    "./.webpack",
+    "./.changelog_historico",
+    "./.scripts",
+    "./modulos",
+    "./siga",
+    "./api"
+  ]
+}

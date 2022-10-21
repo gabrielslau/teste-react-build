@@ -1,0 +1,6 @@
+/assets/src/yup.locale.pt-br.js
+/assets/coletados/**
+/assets/public/**
+/assets/src/tema/**
+node_modules
+**/*/custom.d.ts

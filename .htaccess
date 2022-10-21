@@ -1,0 +1,111 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Force HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # If an existing asset or directory is requested go to it as it is
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+  RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+  RewriteRule ^ - [L]
+
+  # If the requested resource doesn't exist, use index.html
+  Options +FollowSymLinks -Indexes
+
+  RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|png|gif|svg|txt|ico)$ [NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !index
+  RewriteRule (.*) index.html [L]
+</IfModule>
+
+<IfModule mod_deflate.c>
+  SetOutputFilter DEFLATE
+  AddOutputFilterByType DEFLATE "text/html" \
+    "text/plain" \
+    "text/xml" \
+    "text/css" \
+    "text/cache-manifest" \
+    "text/javascript" \
+    "text/vcard" \
+    "text/vnd.rim.location.xloc" \
+    "text/vtt" \
+    "text/x-component" \
+    "text/x-cross-domain-policy" \
+    "font/eot" \
+    "font/otf" \
+    "font/ttf" \
+    "font/opentype" \
+    "image/bmp" \
+    "image/svg+xml" \
+    "image/vnd.microsoft.icon" \
+    "image/x-icon" \
+    "application/json" \
+    "application/ld+json" \
+    "application/x-javascript" \
+    "application/javascript" \
+    "application/manifest+json" \
+    "application/rdf+xml" \
+    "application/rss+xml" \
+    "application/xml" \
+    "application/xml+rss" \
+    "application/xhtml+xml"
+
+  DeflateCompressionLevel 9
+
+  BrowserMatch ^Mozilla/4 gzip-only-text/html
+  BrowserMatch ^Mozilla/4\.0[678] no-gzip
+  BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access 1 month"
+  ExpiresByType image/jpeg "access 1 month"
+  ExpiresByType image/gif "access 1 month"
+  ExpiresByType image/png "access 1 month"
+  ExpiresByType image/vnd.microsoft.icon "access 1 year"
+  ExpiresByType image/x-icon "access 1 year"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType font/ttf      "access 1 month"
+  ExpiresByType font/woff     "access 1 month"
+  ExpiresByType font/woff2    "access 1 month"
+  ExpiresByType image/svg+xml "access 1 month"
+  ExpiresByType text/css      "access 1 month"
+  ExpiresByType application/javascript "access 1 month"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header append Vary User-Agent env=!dont-vary
+
+  <filesMatch "\.(ico|jpe?g|png|gif|woff|woff2)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </filesMatch>
+
+  <filesMatch "\.(css)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </filesMatch>
+
+  <filesMatch "\.(js)$">
+    Header set Cache-Control "private"
+  </filesMatch>
+
+  <filesMatch "sw\.js$">
+    FileETag None
+    Header unset ETag
+    Header unset Last-Modified
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "Sat, 17 Dec 1988 02:00:00 GMT"
+  </filesMatch>
+
+  <filesMatch "\.(x?html?)$">
+    Header unset ETag
+    Header unset Last-Modified
+    Header set Cache-Control "private, must-revalidate, max-age=0, no-cache, no-store"
+    Header set Pragma "no-cache"
+    Header set Expires "Sat, 17 Dec 1988 02:00:00 GMT"
+  </filesMatch>
+</IfModule>
